@@ -21,19 +21,23 @@
 </head>
 
 <body>
-  <a class="skip-link" href="#main-content">Aller au contenu</a>
 
   <header class="site-header">
     <div class="container header-inner">
       <a class="logo" href="index.html" aria-label="Doing - Accueil">Doing</a>
-      <nav class="site-nav" aria-label="Navigation principale">
+      <button class="nav-toggle" type="button" aria-label="Ouvrir le menu" aria-controls="primary-nav"
+        aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <nav id="primary-nav" class="site-nav" aria-label="Navigation principale">
         <ul>
-          <li><a href="index.html" aria-current="page">Accueil</a></li>
           <li><a href="privacy.html">Confidentialité</a></li>
+          <li><a href="terms.html">Conditions d'utilisation</a></li>
           <li><a href="support.html">Support</a></li>
         </ul>
       </nav>
-      <a class="btn btn-primary nav-cta" href="#download" aria-label="Aller à la section téléchargement">Télécharger</a>
     </div>
   </header>
 
@@ -46,56 +50,39 @@
             Doing t'aide à choisir une tâche essentielle, travailler en sessions, et suivre ton activité.
             Un rythme clair, sans surcharge.
           </p>
-          <div class="hero-actions">
-            <a class="btn btn-primary" href="#download" aria-label="Télécharger l'application">Télécharger</a>
-            <a class="btn btn-secondary" href="#how-it-works" aria-label="Voir comment Doing fonctionne">Voir comment ça
-              marche</a>
+          <div class="hero-actions hero-actions--stores">
+            <a class="hero-store-btn" href="#" aria-label="Télécharger sur l'App Store">
+              <span class="hero-store-icon" aria-hidden="true">
+                <svg viewBox="0 0 384 512" class="hero-store-svg hero-store-svg-apple">
+                  <path
+                    d="M318.7 268.7c-.2-36.7 16.3-64.4 49.4-84.6-18.5-26.4-46.5-40.9-83.7-43.8-35.2-2.8-73.7 20.7-87.7 20.7-14.8 0-48.9-19.7-75.7-19.7C65.7 142.2 7 186.2 7 273.2c0 25.7 4.7 52.3 14.1 79.8 12.5 36.7 57.7 126.7 104.8 125.2 24.6-.6 42-17.5 74-17.5 31 0 47.1 17.5 74.6 17.5 47.5-.7 88.3-82.5 100.2-119.3-68.1-32.1-56-95.4-55.9-90.5zM260.2 111.6c27.1-32.1 24.6-61.3 23.8-71.9-23.9 1.4-51.6 16.2-67.4 34.6-17.4 19.8-27.7 44.2-25.5 71.5 26.1 2 49-11.2 69.1-34.2z">
+                  </path>
+                </svg>
+              </span>
+              <span class="hero-store-text">App Store</span>
+            </a>
+            <a class="hero-store-btn" href="#" aria-label="Télécharger sur Google Play">
+              <span class="hero-store-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" class="hero-store-svg">
+                  <path fill="#ffffff" d="M4 4.8v14.4l8.6-7.2L4 4.8Z"></path>
+                  <path fill="#ffffff" d="m12.6 12 2.9-2.4 3.8 2.4-3.8 2.4-2.9-2.4Z"></path>
+                  <path fill="#ffffff" d="M4 4.8 15.5 9.6 12.6 12 4 4.8Z"></path>
+                  <path fill="#ffffff" d="M4 19.2 12.6 12l2.9 2.4L4 19.2Z"></path>
+                </svg>
+              </span>
+              <span class="hero-store-text">Google Play</span>
+            </a>
           </div>
         </div>
         <div class="hero-visual" aria-hidden="true">
-          <div class="ph ph-phone" title="Placeholder capture d'écran"></div>
-          <div class="pills hero-pills" role="list">
-            <span class="pill" role="listitem">Minimaliste</span>
-            <span class="pill" role="listitem">Sans friction</span>
-            <span class="pill" role="listitem">Conçu pour passer à l'action</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="how-it-works" class="section">
-      <div class="container grid-2">
-        <div>
-          <h2 class="section-title">Comment ça marche</h2>
-          <p class="section-lead">Trois étapes simples pour transformer l'intention en progrès concret.</p>
-          <div class="grid-2" style="margin-top: 1.2rem; grid-template-columns: 1fr;">
-            <article class="card">
-              <p class="step-number">01</p>
-              <h3 class="step-title">Choisis ta tâche essentielle</h3>
-              <p class="step-text">Clarifie ton objectif du jour en une action prioritaire.</p>
-            </article>
-            <article class="card">
-              <p class="step-number">02</p>
-              <h3 class="step-title">Travaille en session</h3>
-              <p class="step-text">Lance une session courte pour rester concentré et avancer.</p>
-            </article>
-            <article class="card">
-              <p class="step-number">03</p>
-              <h3 class="step-title">Visualise ton activité</h3>
-              <p class="step-text">Consulte tes progrès pour renforcer la régularité.</p>
-            </article>
-          </div>
-        </div>
-        <div class="card how-visual" aria-hidden="true">
-          <div class="ph ph-wide" title="Placeholder illustration fonctionnement"></div>
+          <div class="ph ph-logo" title="Placeholder logo"></div>
         </div>
       </div>
     </section>
 
     <section id="features" class="section">
       <div class="container">
-        <h2 class="section-title">Fonctionnalités</h2>
-        <p class="section-lead">L'application est pensée pour rester simple et utile au quotidien.</p>
+        <h2 class="section-title">Pourquoi utiliser Doing ?</h2>
         <ul class="feature-list">
           <li class="feature-item">
             <span class="feature-icon" aria-hidden="true">
@@ -104,7 +91,8 @@
                 <path d="M8.5 12.2 11 14.7 15.8 9.8"></path>
               </svg>
             </span>
-            Tâche essentielle du jour
+            <span class="feature-title">Tâche essentielle du jour</span>
+            <span class="feature-subtext">Concentre ton énergie sur une priorité claire, sans te disperser.</span>
           </li>
           <li class="feature-item">
             <span class="feature-icon" aria-hidden="true">
@@ -113,7 +101,8 @@
                 <path d="M12 7v5l3.5 2"></path>
               </svg>
             </span>
-            Sessions de travail (avec ou sans chrono)
+            <span class="feature-title">Sessions de travail</span>
+            <span class="feature-subtext">Avance en blocs courts, avec ou sans minuteur selon ton rythme.</span>
           </li>
           <li class="feature-item">
             <span class="feature-icon" aria-hidden="true">
@@ -123,7 +112,8 @@
                 <path d="M8.6 14.4A5.5 5.5 0 1 1 15.4 14.4c-.8.7-1.2 1.5-1.2 2.6h-4c0-1.1-.4-1.9-1.2-2.6Z"></path>
               </svg>
             </span>
-            Recommandations inteligentes
+            <span class="feature-title">Recommandations intelligentes</span>
+            <span class="feature-subtext">L’app t’aide à choisir la meilleure action à faire maintenant.</span>
           </li>
           <li class="feature-item">
             <span class="feature-icon" aria-hidden="true">
@@ -133,7 +123,8 @@
                 <path d="M8 3.8v2.4M16 3.8v2.4"></path>
               </svg>
             </span>
-            Vue Aujourd'hui / Semaine / Mois
+            <span class="feature-title">Vues Aujourd'hui / Semaine / Mois</span>
+            <span class="feature-subtext">Planifie tes tâches et organise toi à ton rythme.</span>
           </li>
           <li class="feature-item">
             <span class="feature-icon" aria-hidden="true">
@@ -144,13 +135,15 @@
                 <path d="M20 18V13"></path>
               </svg>
             </span>
-            Statistiques par projet et objectif
+            <span class="feature-title">Statistiques par projet</span>
+            <span class="feature-subtext">Constate le temps que tu as consacré à chaque projet.</span>
           </li>
           <li class="feature-item">
             <span class="feature-icon" aria-hidden="true">
               <img src="assets/img/fire-icon.svg" alt="" class="feature-img-icon" />
             </span>
-            Streak journalier pour la constance
+            <span class="feature-title">Streak journalier</span>
+            <span class="feature-subtext">Créer un momentum et entretiens ta constance au quotidien</span>
           </li>
           <li class="feature-item">
             <span class="feature-icon" aria-hidden="true">
@@ -160,53 +153,44 @@
                 <circle cx="12" cy="15.1" r="1"></circle>
               </svg>
             </span>
-            Souveraineté de vos données
+            <span class="feature-title">Souveraineté des données</span>
+            <span class="feature-subtext">Garde le contrôle de tes informations personnelles à tout moment.</span>
           </li>
         </ul>
       </div>
     </section>
 
-    <section id="download" class="section">
+    <section id="how-it-works" class="section">
       <div class="container">
-        <h2 class="section-title">Téléchargement</h2>
-        <div class="download-panel">
-          <p class="section-lead">
-            Retrouvez Doing sur
-          </p>
-          <div class="download-actions">
-            <a class="btn btn-secondary btn-store store-badge" href="#" aria-label="Télécharger sur l'App Store">
-              <span class="store-logo" aria-hidden="true">
-                <svg viewBox="0 0 24 24" class="store-svg store-svg-apple">
-                  <path
-                    d="M15.2 12.5c0-2.4 2-3.6 2-3.6s-1.1-1.8-3-1.8c-1.3-.1-2.5.8-3.1.8s-1.6-.8-2.6-.8c-2 0-3.8 1.6-3.8 4.6 0 2.6 1 5.3 2.2 7 .8 1.1 1.7 2.2 2.9 2.1s1.6-.7 3-.7 1.8.7 3 .7 2-.9 2.8-2c.9-1.3 1.3-2.6 1.3-2.6s-2.5-1-2.5-3.7Z">
-                  </path>
-                  <path d="M13.4 5.8c.6-.8 1-1.9.9-3-.9.1-2 .6-2.6 1.4-.6.7-1 1.8-.9 2.9 1 .1 2-.5 2.6-1.3Z"></path>
-                </svg>
-              </span>
-              <span class="store-copy">
-                <span class="store-overline">Télécharger sur</span>
-                <span class="store-name">App Store</span>
-              </span>
-            </a>
-            <a class="btn btn-secondary btn-store store-badge" href="#" aria-label="Télécharger sur Google Play">
-              <span class="store-logo" aria-hidden="true">
-                <svg viewBox="0 0 24 24" class="store-svg store-svg-play">
-                  <path fill="#34a853" d="M4 4.8v14.4l8.6-7.2L4 4.8Z"></path>
-                  <path fill="#fbbc04" d="m12.6 12 2.9-2.4 3.8 2.4-3.8 2.4-2.9-2.4Z"></path>
-                  <path fill="#4285f4" d="M4 4.8 15.5 9.6 12.6 12 4 4.8Z"></path>
-                  <path fill="#ea4335" d="M4 19.2 12.6 12l2.9 2.4L4 19.2Z"></path>
-                </svg>
-              </span>
-              <span class="store-copy">
-                <span class="store-overline">Disponible sur</span>
-                <span class="store-name">Google Play</span>
-              </span>
-            </a>
+        <h2 class="section-title">Découvrir l'app</h2>
+        <div class="app-carousel" data-carousel>
+          <button class="carousel-btn carousel-btn--prev" type="button" aria-label="Image précédente">‹</button>
+          <div class="carousel-track" data-carousel-track>
+            <figure class="carousel-slide"><img src="assets/img/screens/screen-1.svg"
+                alt="Aperçu écran 1 de l'application" loading="lazy"></figure>
+            <figure class="carousel-slide"><img src="assets/img/screens/screen-2.svg"
+                alt="Aperçu écran 2 de l'application" loading="lazy"></figure>
+            <figure class="carousel-slide"><img src="assets/img/screens/screen-3.svg"
+                alt="Aperçu écran 3 de l'application" loading="lazy"></figure>
+            <figure class="carousel-slide"><img src="assets/img/screens/screen-4.svg"
+                alt="Aperçu écran 4 de l'application" loading="lazy"></figure>
+            <figure class="carousel-slide"><img src="assets/img/screens/screen-5.svg"
+                alt="Aperçu écran 5 de l'application" loading="lazy"></figure>
+            <figure class="carousel-slide"><img src="assets/img/screens/screen-6.svg"
+                alt="Aperçu écran 6 de l'application" loading="lazy"></figure>
+            <figure class="carousel-slide"><img src="assets/img/screens/screen-7.svg"
+                alt="Aperçu écran 7 de l'application" loading="lazy"></figure>
           </div>
-          <p class="download-note">iOS et Android</p>
+          <button class="carousel-btn carousel-btn--next" type="button" aria-label="Image suivante">›</button>
+          <div class="carousel-dots" data-carousel-dots></div>
         </div>
       </div>
     </section>
+
+    <div class="screen-lightbox" data-screen-lightbox hidden>
+      <button class="screen-lightbox-close" type="button" aria-label="Fermer l'aperçu">×</button>
+      <img src="" alt="" class="screen-lightbox-image" data-screen-lightbox-image>
+    </div>
 
     <section id="faq" class="section">
       <div class="container">
@@ -260,14 +244,48 @@
         </div>
       </div>
     </section>
+
+    <section id="download" class="section">
+      <div class="container">
+        <h2 class="section-title">Commencer !</h2>
+        <div class="download-panel">
+          <p class="section-lead">
+            Retrouvez Doing sur
+          </p>
+          <div class="download-actions hero-actions--stores">
+            <a class="hero-store-btn" href="#" aria-label="Télécharger sur l'App Store">
+              <span class="hero-store-icon" aria-hidden="true">
+                <svg viewBox="0 0 384 512" class="hero-store-svg hero-store-svg-apple">
+                  <path
+                    d="M318.7 268.7c-.2-36.7 16.3-64.4 49.4-84.6-18.5-26.4-46.5-40.9-83.7-43.8-35.2-2.8-73.7 20.7-87.7 20.7-14.8 0-48.9-19.7-75.7-19.7C65.7 142.2 7 186.2 7 273.2c0 25.7 4.7 52.3 14.1 79.8 12.5 36.7 57.7 126.7 104.8 125.2 24.6-.6 42-17.5 74-17.5 31 0 47.1 17.5 74.6 17.5 47.5-.7 88.3-82.5 100.2-119.3-68.1-32.1-56-95.4-55.9-90.5zM260.2 111.6c27.1-32.1 24.6-61.3 23.8-71.9-23.9 1.4-51.6 16.2-67.4 34.6-17.4 19.8-27.7 44.2-25.5 71.5 26.1 2 49-11.2 69.1-34.2z">
+                  </path>
+                </svg>
+              </span>
+              <span class="hero-store-text">App Store</span>
+            </a>
+            <a class="hero-store-btn" href="#" aria-label="Télécharger sur Google Play">
+              <span class="hero-store-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" class="hero-store-svg">
+                  <path fill="#ffffff" d="M4 4.8v14.4l8.6-7.2L4 4.8Z"></path>
+                  <path fill="#ffffff" d="m12.6 12 2.9-2.4 3.8 2.4-3.8 2.4-2.9-2.4Z"></path>
+                  <path fill="#ffffff" d="M4 4.8 15.5 9.6 12.6 12 4 4.8Z"></path>
+                  <path fill="#ffffff" d="M4 19.2 12.6 12l2.9 2.4L4 19.2Z"></path>
+                </svg>
+              </span>
+              <span class="hero-store-text">Google Play</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 
   <footer class="site-footer">
     <div class="container footer-inner">
       <div class="footer-links" aria-label="Liens footer">
-        <a href="index.html">Accueil</a>
         <a href="privacy.html">Confidentialité</a>
         <a href="support.html">Support</a>
+        <a href="terms.html">Conditions d'utilisation</a>
       </div>
       <p class="footer-meta">© 2026 Doing · Contact : <a href="mailto:support@getdoing.app">support@getdoing.app</a></p>
     </div>

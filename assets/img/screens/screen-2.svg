@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1920" viewBox="0 0 1080 1920" role="img" aria-labelledby="title desc">
+  <title>Placeholder screen</title>
+  <desc>Image fictive pour futur screenshot d'application.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f3f4f6"/>
+      <stop offset="100%" stop-color="#e5e7eb"/>
+    </linearGradient>
+  </defs>
+  <rect width="1080" height="1920" rx="54" fill="url(#bg)"/>
+  <rect x="90" y="180" width="900" height="84" rx="18" fill="#d1d5db"/>
+  <rect x="90" y="320" width="620" height="42" rx="12" fill="#9ca3af"/>
+  <rect x="90" y="390" width="780" height="32" rx="10" fill="#c7ccd4"/>
+  <rect x="90" y="520" width="900" height="250" rx="28" fill="#ffffff" stroke="#d6dae1"/>
+  <rect x="90" y="810" width="900" height="250" rx="28" fill="#ffffff" stroke="#d6dae1"/>
+  <rect x="90" y="1100" width="900" height="250" rx="28" fill="#ffffff" stroke="#d6dae1"/>
+  <text x="540" y="1630" text-anchor="middle" font-family="Arial, sans-serif" font-size="64" fill="#6b7280">SCREEN 2</text>
+</svg>
