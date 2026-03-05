@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Support - Doing</title>
+    <meta
+      name="description"
+      content="Support Doing : contactez l'équipe, consultez les problèmes fréquents et envoyez un message."
+    />
+    <meta property="og:title" content="Support - Doing" />
+    <meta
+      property="og:description"
+      content="Besoin d'aide avec Doing ? Retrouvez les options de contact et les réponses fréquentes."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://doing.app/support.html" />
+    <meta
+      property="og:image"
+      content="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='630'%3E%3Crect width='1200' height='630' fill='%23eceef1'/%3E%3C/svg%3E"
+    />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231f2937'/%3E%3C/svg%3E"
+    />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+    <script src="assets/js/main.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Aller au contenu</a>
+
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="logo" href="index.html" aria-label="Doing - Accueil">Doing</a>
+        <nav class="site-nav" aria-label="Navigation principale">
+          <ul>
+            <li><a href="index.html">Accueil</a></li>
+            <li><a href="privacy.html">Confidentialité</a></li>
+            <li><a href="support.html" aria-current="page">Support</a></li>
+          </ul>
+        </nav>
+        <a class="btn btn-primary nav-cta" href="index.html#download" aria-label="Aller à la section téléchargement">Télécharger</a>
+      </div>
+    </header>
+
+    <main id="main-content" class="main">
+      <section class="section page-title">
+        <div class="container">
+          <h1>Support</h1>
+          <p>Nous sommes disponibles pour vous aider dès que possible.</p>
+        </div>
+      </section>
+
+      <section class="section" style="padding-top: 0;">
+        <div class="container support-grid">
+          <article class="content-card" id="contact">
+            <h2>Contact</h2>
+            <p>Pour toute demande, vous pouvez nous écrire directement.</p>
+            <p>
+              Email : <a class="contact-link" href="mailto:support@getdoing.app">support@getdoing.app</a>
+            </p>
+            <p>Nous répondons dès que possible.</p>
+          </article>
+
+          <article class="content-card">
+            <h2>Problèmes fréquents</h2>
+            <ul class="anchor-list">
+              <li><a href="#issue-import-export">Import / Export</a></li>
+              <li><a href="#issue-notifications">Notifications</a></li>
+              <li><a href="#issue-sync">Synchronisation (future)</a></li>
+              <li><a href="#issue-bugs">Bugs</a></li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" style="padding-top: 0;">
+        <div class="container support-grid">
+          <article class="content-card" id="issue-import-export">
+            <h2>Import / Export</h2>
+            <p>
+              Vous pouvez exporter vos données en JSON depuis l'application, puis les réimporter localement.
+            </p>
+          </article>
+
+          <article class="content-card" id="issue-notifications">
+            <h2>Notifications</h2>
+            <p>
+              Vérifiez d'abord les autorisations de notifications dans les réglages de votre appareil.
+            </p>
+          </article>
+
+          <article class="content-card" id="issue-sync">
+            <h2>Synchronisation (future)</h2>
+            <p>
+              La synchronisation entre appareils est en réflexion. Les données restent locales en version actuelle.
+            </p>
+          </article>
+
+          <article class="content-card" id="issue-bugs">
+            <h2>Bugs</h2>
+            <p>
+              Si vous rencontrez un problème, indiquez le contexte, l'appareil et les étapes pour reproduire.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" style="padding-top: 0;">
+        <div class="container">
+          <article class="content-card">
+            <h2>Formulaire de contact</h2>
+            <form id="support-form" class="support-form" novalidate>
+              <div class="form-row">
+                <label for="name">Nom</label>
+                <input id="name" name="name" type="text" autocomplete="name" required />
+              </div>
+              <div class="form-row">
+                <label for="email">Email</label>
+                <input id="email" name="email" type="email" autocomplete="email" required />
+              </div>
+              <div class="form-row">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" required></textarea>
+              </div>
+              <button class="btn btn-primary" type="submit" aria-label="Envoyer le message">Envoyer</button>
+              <p id="form-feedback" class="inline-feedback" hidden aria-live="polite"></p>
+            </form>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <div class="footer-links" aria-label="Liens footer">
+          <a href="index.html">Accueil</a>
+          <a href="privacy.html">Confidentialité</a>
+          <a href="support.html">Support</a>
+        </div>
+        <p class="footer-meta">© 2026 Doing · Contact : <a href="mailto:support@getdoing.app">support@getdoing.app</a></p>
+      </div>
+    </footer>
+  </body>
+</html>
