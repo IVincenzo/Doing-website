@@ -16,18 +16,18 @@
 
     siteNav.querySelectorAll('a').forEach((link) => {
       link.addEventListener('click', () => {
-        if (window.innerWidth <= 700) closeMobileMenu();
+        if (window.innerWidth <= 768) closeMobileMenu();
       });
     });
 
     document.addEventListener('click', (event) => {
-      if (window.innerWidth > 700) return;
+      if (window.innerWidth > 768) return;
       const clickedInsideHeader = siteHeader.contains(event.target);
       if (!clickedInsideHeader) closeMobileMenu();
     });
 
     window.addEventListener('resize', () => {
-      if (window.innerWidth > 700) closeMobileMenu();
+      if (window.innerWidth > 768) closeMobileMenu();
     });
   }
 
