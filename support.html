@@ -26,7 +26,8 @@
   <header class="site-header">
     <div class="container header-inner">
       <a class="logo" href="index.html" aria-label="Doing - Accueil">Doing</a>
-      <button class="nav-toggle" type="button" aria-label="Ouvrir le menu" aria-controls="primary-nav" aria-expanded="false">
+      <button class="nav-toggle" type="button" aria-label="Ouvrir le menu" aria-controls="primary-nav"
+        aria-expanded="false">
         <span></span>
         <span></span>
         <span></span>
@@ -54,7 +55,8 @@
       <div class="container">
         <article class="content-card">
           <h2>Formulaire de contact</h2>
-          <form id="support-form" class="support-form" novalidate>
+          <form id="support-form" class="support-form"
+            data-support-endpoint="https://hzpbfxghdmrndysmtfgi.supabase.co/functions/v1/support" novalidate>
             <div class="form-row">
               <label for="name">Nom</label>
               <input id="name" name="name" type="text" autocomplete="name" required />
@@ -67,7 +69,8 @@
               <label for="message">Message</label>
               <textarea id="message" name="message" required></textarea>
             </div>
-            <button class="btn btn-primary" type="submit" aria-label="Envoyer le message">Envoyer</button>
+            <button class="btn btn-primary support-submit" type="submit"
+              aria-label="Envoyer le message">Envoyer</button>
             <p id="form-feedback" class="inline-feedback" hidden aria-live="polite"></p>
           </form>
         </article>
@@ -79,7 +82,8 @@
     <div class="container footer-inner">
       <div class="footer-links" aria-label="Liens footer">
         <a href="privacy.html">Politique de confidentialité</a>
-        <a href="terms.html"><span class="footer-link-full">Conditions générales d'utilisation</span><span class="footer-link-short">CGU</span></a>
+        <a href="terms.html"><span class="footer-link-full">Conditions générales d'utilisation</span><span
+            class="footer-link-short">CGU</span></a>
         <a href="legal_notice.html">Mentions légales</a>
         <a href="support.html">Support</a>
       </div>

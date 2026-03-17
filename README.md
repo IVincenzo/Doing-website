@@ -38,3 +38,20 @@ Puis ouvrir `http://localhost:8080`.
 - Aucun framework, aucune dépendance CDN.
 - Liens internes fonctionnels entre les 3 pages publiques.
 - Les visuels sont des placeholders (`.ph`) pour être remplacés plus tard.
+
+## Formulaire support
+
+Le formulaire de `support.html` est prévu pour appeler une Edge Function Supabase.
+
+1. Déployer la fonction :
+   `supabase functions deploy support --no-verify-jwt`
+2. Configurer les secrets :
+   `supabase secrets set RESEND_API_KEY=... SUPPORT_FROM_EMAIL="Doing Support <support@doing.app>" SUPPORT_TO_EMAIL="contact@getdoing.app"`
+3. Renseigner l'URL de la fonction dans l'attribut `data-support-endpoint` du formulaire de `support.html` :
+   `https://<project-ref>.functions.supabase.co/support`
+
+Variables utilisées par la fonction :
+
+- `RESEND_API_KEY`
+- `SUPPORT_FROM_EMAIL` : adresse expéditrice validée dans Resend
+- `SUPPORT_TO_EMAIL` : optionnelle, par défaut `contact@getdoing.app`

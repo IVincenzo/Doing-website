@@ -270,10 +270,63 @@
   const supportFeedback = document.getElementById('form-feedback');
 
   if (supportForm && supportFeedback) {
-    supportForm.addEventListener('submit', (event) => {
+    const submitButton = supportForm.querySelector('button[type="submit"]');
+    const supportEndpoint = supportForm.dataset.supportEndpoint;
+
+    supportForm.addEventListener('submit', async (event) => {
       event.preventDefault();
+
+      const formData = new FormData(supportForm);
+      const payload = {
+        name: String(formData.get('name') || '').trim(),
+        email: String(formData.get('email') || '').trim(),
+        message: String(formData.get('message') || '').trim(),
+      };
+
       supportFeedback.hidden = false;
-      supportFeedback.textContent = 'Merci ! En V1, contactez-nous par email : support@getdoing.app';
+      supportFeedback.classList.remove('inline-feedback--error');
+
+      if (!payload.name || !payload.email || !payload.message) {
+        supportFeedback.classList.add('inline-feedback--error');
+        supportFeedback.textContent = 'Merci de remplir tous les champs.';
+        return;
+      }
+
+      if (!supportEndpoint) {
+        supportFeedback.classList.add('inline-feedback--error');
+        supportFeedback.textContent = "Le formulaire n'est pas encore configuré. Écrivez-nous à contact@getdoing.app.";
+        return;
+      }
+
+      if (submitButton) {
+        submitButton.disabled = true;
+        submitButton.textContent = 'Envoi...';
+      }
+
+      try {
+        const response = await fetch(supportEndpoint, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(payload),
+        });
+
+        if (!response.ok) {
+          throw new Error('Support request failed');
+        }
+
+        supportForm.reset();
+        supportFeedback.textContent = 'Merci, votre message a bien été envoyé.';
+      } catch (error) {
+        supportFeedback.classList.add('inline-feedback--error');
+        supportFeedback.textContent = "L'envoi a échoué. Écrivez-nous à contact@getdoing.app.";
+      } finally {
+        if (submitButton) {
+          submitButton.disabled = false;
+          submitButton.textContent = 'Envoyer';
+        }
+      }
     });
   }
 })();
