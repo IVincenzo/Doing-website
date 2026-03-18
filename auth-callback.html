@@ -271,13 +271,15 @@
     </section>
   </main>
 
-  <script type="module">
-    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
-
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
     const SUPABASE_URL = 'https://hzpbfxghdmrndysmtfgi.supabase.co';
     const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imh6cGJmeGdoZG1ybmR5c210ZmdpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM1MTA3ODksImV4cCI6MjA4OTA4Njc4OX0.IAzIqFP0ZM15GzcF-JjiAHYEFjxaXVj4cYi9ulsXovk';
 
-    const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    const supabaseFactory = window.supabase;
+    const supabase = supabaseFactory?.createClient
+      ? supabaseFactory.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+      : null;
 
     const statusBanner = document.getElementById('statusBanner');
     const stateCopy = document.getElementById('stateCopy');
@@ -360,6 +362,16 @@
       await ensureRecoverySession();
     };
 
+    const startupWatchdog = window.setTimeout(() => {
+      if (resetForm.classList.contains('hidden')) {
+        setBanner(
+          "La page n'a pas pu initialiser Supabase correctement. Recharge la page ou redemande un nouvel email.",
+          'error',
+        );
+        stateCopy.textContent = 'Impossible de verifier le lien pour le moment.';
+      }
+    }, 8000);
+
     const normalizeSupabaseError = (error) => {
       const rawMessage = error?.message || '';
       const message = rawMessage.toLowerCase();
@@ -429,15 +441,24 @@ document.querySelectorAll('[data-toggle-password]').forEach((button) => {
       }
     });
 
-    try {
-      setLoadingState('Verification du lien de reinitialisation...');
-      await initializeRecoverySession();
-      window.history.replaceState({}, document.title, '/auth-callback.html');
-      setReadyState();
-    } catch (error) {
-      setBanner(normalizeSupabaseError(error), 'error');
-      setLoadingState('Le lien ne permet pas de reinitialiser ton mot de passe.');
-    }
+    const bootstrap = async () => {
+      try {
+        setLoadingState('Verification du lien de reinitialisation...');
+        if (!supabase) {
+          throw new Error("Le client Supabase web n'a pas pu etre charge.");
+        }
+        await initializeRecoverySession();
+        window.history.replaceState({}, document.title, '/auth-callback.html');
+        setReadyState();
+      } catch (error) {
+        setBanner(normalizeSupabaseError(error), 'error');
+        setLoadingState('Le lien ne permet pas de reinitialiser ton mot de passe.');
+      } finally {
+        window.clearTimeout(startupWatchdog);
+      }
+    };
+
+    bootstrap();
   </script>
 </body>
 
