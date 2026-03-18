@@ -24,7 +24,9 @@
       --radius: 22px;
     }
 
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
 
     body {
       margin: 0;
@@ -107,11 +109,15 @@
       line-height: 1.45;
     }
 
-    .banner.is-visible { display: block; }
+    .banner.is-visible {
+      display: block;
+    }
+
     .banner.is-error {
       background: var(--danger-bg);
       color: var(--danger);
     }
+
     .banner.is-success {
       background: var(--success-bg);
       color: var(--success);
@@ -192,7 +198,10 @@
       transition: transform 120ms ease, opacity 120ms ease;
     }
 
-    .btn:hover { transform: translateY(-1px); }
+    .btn:hover {
+      transform: translateY(-1px);
+    }
+
     .btn:disabled {
       opacity: 0.65;
       cursor: not-allowed;
@@ -223,7 +232,9 @@
       font-weight: 700;
     }
 
-    .hidden { display: none !important; }
+    .hidden {
+      display: none !important;
+    }
   </style>
 </head>
 
@@ -314,7 +325,7 @@
       const { data, error } = await supabase.auth.getSession();
       if (error) throw error;
       if (!data.session) {
-        throw new Error('Aucune session de reinitialisation n'a ete creee.');
+        throw new Error("Aucune session de reinitialisation n'a ete creee.");
       }
     };
 
@@ -376,7 +387,7 @@
       const rawMessage = error?.message || '';
       const message = rawMessage.toLowerCase();
       if (message.includes('same password')) {
-        return 'Choisis un mot de passe different de l'actuel.';
+        return "Choisis un mot de passe different de l'actuel.";
       }
       if (message.includes('password should be at least')) {
         return 'Le mot de passe est trop court.';
@@ -388,12 +399,12 @@
         return `Le lien de reinitialisation est invalide ou expire. Détail Supabase: ${rawMessage || 'inconnu'}`;
       }
       if (message.includes('aucune session')) {
-        return 'Le lien a bien ete ouvert, mais Supabase n'a pas cree de session de reinitialisation.';
+        return "Le lien a bien ete ouvert, mais Supabase n'a pas cree de session de reinitialisation.";
       }
       return rawMessage || 'Une erreur est survenue.';
     };
 
-document.querySelectorAll('[data-toggle-password]').forEach((button) => {
+    document.querySelectorAll('[data-toggle-password]').forEach((button) => {
       button.addEventListener('click', () => {
         const input = document.getElementById(button.dataset.togglePassword);
         if (!input) return;
