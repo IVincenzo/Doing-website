@@ -1,0 +1,420 @@
+<!doctype html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Doing - Reinitialiser le mot de passe</title>
+  <meta name="description" content="Reinitialise ton mot de passe Doing en toute securite." />
+  <style>
+    :root {
+      --bg: #f6f7f8;
+      --surface: #ffffff;
+      --surface-muted: #f9fafb;
+      --text: #111827;
+      --text-muted: #4b5563;
+      --border: #e5e7eb;
+      --brand: #19b7a5;
+      --brand-soft: #149786;
+      --danger: #b42318;
+      --danger-bg: #fee4e2;
+      --success: #065f46;
+      --success-bg: #ecfdf3;
+      --shadow: 0 20px 50px rgba(15, 23, 42, 0.10);
+      --radius: 22px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, Arial, sans-serif;
+      background:
+        radial-gradient(circle at top right, rgba(25, 183, 165, 0.16), transparent 28%),
+        radial-gradient(circle at bottom left, rgba(20, 151, 134, 0.12), transparent 24%),
+        var(--bg);
+      color: var(--text);
+      display: grid;
+      place-items: center;
+      padding: 24px;
+    }
+
+    .card {
+      width: min(100%, 460px);
+      background: var(--surface);
+      border: 1px solid rgba(17, 24, 39, 0.06);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .hero {
+      padding: 26px 26px 18px;
+      background: linear-gradient(135deg, rgba(14, 165, 164, 0.16), rgba(52, 211, 153, 0.08));
+      border-bottom: 1px solid rgba(17, 24, 39, 0.05);
+    }
+
+    .brand-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .brand-mark {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, #0ea5a4, #34d399);
+      color: white;
+      font-size: 20px;
+      font-weight: 800;
+      box-shadow: 0 14px 26px rgba(14, 165, 164, 0.24);
+    }
+
+    .brand-name {
+      font-size: 1.3rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    h1 {
+      margin: 0 0 10px;
+      font-size: clamp(1.8rem, 4vw, 2.2rem);
+      line-height: 1.1;
+      letter-spacing: -0.04em;
+    }
+
+    .lead {
+      margin: 0;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+
+    .content {
+      padding: 24px 26px 26px;
+    }
+
+    .banner {
+      display: none;
+      border-radius: 16px;
+      padding: 14px 16px;
+      margin-bottom: 16px;
+      font-weight: 600;
+      line-height: 1.45;
+    }
+
+    .banner.is-visible { display: block; }
+    .banner.is-error {
+      background: var(--danger-bg);
+      color: var(--danger);
+    }
+    .banner.is-success {
+      background: var(--success-bg);
+      color: var(--success);
+    }
+
+    .state-copy {
+      color: var(--text-muted);
+      margin: 0 0 18px;
+      line-height: 1.5;
+    }
+
+    form {
+      display: grid;
+      gap: 14px;
+    }
+
+    .field {
+      display: grid;
+      gap: 8px;
+    }
+
+    .field label {
+      font-size: 0.92rem;
+      font-weight: 600;
+    }
+
+    .input-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: var(--surface-muted);
+      padding: 0 12px;
+    }
+
+    .input-wrap:focus-within {
+      border-color: rgba(25, 183, 165, 0.48);
+      box-shadow: 0 0 0 4px rgba(25, 183, 165, 0.12);
+      background: #fff;
+    }
+
+    .field input {
+      flex: 1;
+      border: 0;
+      outline: 0;
+      background: transparent;
+      color: var(--text);
+      font-size: 1rem;
+      padding: 15px 0;
+    }
+
+    .toggle-btn {
+      appearance: none;
+      border: 0;
+      background: transparent;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 0.82rem;
+      padding: 8px 0 8px 8px;
+    }
+
+    .actions {
+      display: grid;
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    .btn {
+      appearance: none;
+      border: 0;
+      border-radius: 18px;
+      padding: 15px 18px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 120ms ease, opacity 120ms ease;
+    }
+
+    .btn:hover { transform: translateY(-1px); }
+    .btn:disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .btn-primary {
+      color: white;
+      background: linear-gradient(135deg, #0ea5a4, #34d399);
+      box-shadow: 0 18px 30px rgba(14, 165, 164, 0.18);
+    }
+
+    .btn-secondary {
+      color: var(--text);
+      background: #eef2f3;
+    }
+
+    .footer-note {
+      margin-top: 16px;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .footer-note a {
+      color: var(--brand-soft);
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    .hidden { display: none !important; }
+  </style>
+</head>
+
+<body>
+  <main class="card">
+    <section class="hero">
+      <div class="brand-row">
+        <div class="brand-mark">D</div>
+        <div class="brand-name">Doing</div>
+      </div>
+      <h1>Reinitialiser ton mot de passe</h1>
+      <p class="lead">Choisis un nouveau mot de passe pour retrouver l'acces a ton compte.</p>
+    </section>
+
+    <section class="content">
+      <div id="statusBanner" class="banner" role="status" aria-live="polite"></div>
+      <p id="stateCopy" class="state-copy">Verification du lien de reinitialisation...</p>
+
+      <form id="resetForm" class="hidden">
+        <div class="field">
+          <label for="password">Nouveau mot de passe</label>
+          <div class="input-wrap">
+            <input id="password" name="password" type="password" autocomplete="new-password" required />
+            <button class="toggle-btn" type="button" data-toggle-password="password">Afficher</button>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="confirmPassword">Confirmer le mot de passe</label>
+          <div class="input-wrap">
+            <input id="confirmPassword" name="confirmPassword" type="password" autocomplete="new-password" required />
+            <button class="toggle-btn" type="button" data-toggle-password="confirmPassword">Afficher</button>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button id="submitBtn" class="btn btn-primary" type="submit">Enregistrer mon mot de passe</button>
+          <a class="btn btn-secondary" href="/index.html">Retour a l'accueil</a>
+        </div>
+      </form>
+
+      <p class="footer-note">
+        Besoin d'aide ? Ecris-nous sur <a href="mailto:contact@getdoing.app">contact@getdoing.app</a>.
+      </p>
+    </section>
+  </main>
+
+  <script type="module">
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+
+    const SUPABASE_URL = 'https://hzpbfxghdmrndysmtfgi.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imh6cGJmeGdoZG1ybmR5c210ZmdpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM1MTA3ODksImV4cCI6MjA4OTA4Njc4OX0.IAzIqFP0ZM15GzcF-JjiAHYEFjxaXVj4cYi9ulsXovk';
+
+    const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    const statusBanner = document.getElementById('statusBanner');
+    const stateCopy = document.getElementById('stateCopy');
+    const resetForm = document.getElementById('resetForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const passwordInput = document.getElementById('password');
+    const confirmPasswordInput = document.getElementById('confirmPassword');
+
+    const setBanner = (message, kind) => {
+      statusBanner.textContent = message;
+      statusBanner.className = `banner is-visible ${kind === 'error' ? 'is-error' : 'is-success'}`;
+    };
+
+    const clearBanner = () => {
+      statusBanner.textContent = '';
+      statusBanner.className = 'banner';
+    };
+
+    const setLoadingState = (message) => {
+      stateCopy.textContent = message;
+      resetForm.classList.add('hidden');
+    };
+
+    const setReadyState = () => {
+      clearBanner();
+      stateCopy.textContent = 'Entre ton nouveau mot de passe puis confirme-le.';
+      resetForm.classList.remove('hidden');
+      passwordInput.focus();
+    };
+
+    const parseHashParams = () => {
+      const hash = window.location.hash.startsWith('#')
+        ? window.location.hash.slice(1)
+        : window.location.hash;
+      return new URLSearchParams(hash);
+    };
+
+    const initializeRecoverySession = async () => {
+      const url = new URL(window.location.href);
+      const code = url.searchParams.get('code');
+
+      if (code) {
+        const { error } = await supabase.auth.exchangeCodeForSession(code);
+        if (error) throw error;
+        return;
+      }
+
+      const hashParams = parseHashParams();
+      const accessToken = hashParams.get('access_token');
+      const refreshToken = hashParams.get('refresh_token');
+
+      if (accessToken && refreshToken) {
+        const { error } = await supabase.auth.setSession({
+          access_token: accessToken,
+          refresh_token: refreshToken,
+        });
+        if (error) throw error;
+        return;
+      }
+
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) {
+        throw new Error('Lien invalide ou expire. Redemande un email de reinitialisation.');
+      }
+    };
+
+    const normalizeSupabaseError = (error) => {
+      const message = (error?.message || '').toLowerCase();
+      if (message.includes('same password')) {
+        return 'Choisis un mot de passe different de l\'actuel.';
+      }
+      if (message.includes('password should be at least')) {
+        return 'Le mot de passe est trop court.';
+      }
+      if (message.includes('expired') || message.includes('otp')) {
+        return 'Le lien de reinitialisation a expire. Redemande un nouvel email.';
+      }
+      return error?.message || 'Une erreur est survenue.';
+    };
+
+    document.querySelectorAll('[data-toggle-password]').forEach((button) => {
+      button.addEventListener('click', () => {
+        const input = document.getElementById(button.dataset.togglePassword);
+        if (!input) return;
+        const nextType = input.type === 'password' ? 'text' : 'password';
+        input.type = nextType;
+        button.textContent = nextType === 'password' ? 'Afficher' : 'Masquer';
+      });
+    });
+
+    resetForm.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      clearBanner();
+
+      const password = passwordInput.value;
+      const confirmPassword = confirmPasswordInput.value;
+
+      if (!password || !confirmPassword) {
+        setBanner('Entre et confirme ton nouveau mot de passe.', 'error');
+        return;
+      }
+      if (password.length < 6) {
+        setBanner('Le mot de passe doit contenir au moins 6 caracteres.', 'error');
+        return;
+      }
+      if (password !== confirmPassword) {
+        setBanner('Les deux mots de passe ne correspondent pas.', 'error');
+        return;
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Enregistrement...';
+
+      try {
+        const { error } = await supabase.auth.updateUser({ password });
+        if (error) throw error;
+        setBanner('Mot de passe mis a jour. Tu peux maintenant te reconnecter.', 'success');
+        stateCopy.textContent = 'Ton nouveau mot de passe a bien ete enregistre.';
+        resetForm.classList.add('hidden');
+        window.history.replaceState({}, document.title, '/auth-callback.html');
+      } catch (error) {
+        setBanner(normalizeSupabaseError(error), 'error');
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Enregistrer mon mot de passe';
+      }
+    });
+
+    try {
+      setLoadingState('Verification du lien de reinitialisation...');
+      await initializeRecoverySession();
+      setReadyState();
+    } catch (error) {
+      setBanner(normalizeSupabaseError(error), 'error');
+      setLoadingState('Le lien ne permet pas de reinitialiser ton mot de passe.');
+    }
+  </script>
+</body>
+
+</html>
