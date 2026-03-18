@@ -308,6 +308,14 @@
       passwordInput.focus();
     };
 
+    const ensureRecoverySession = async () => {
+      const { data, error } = await supabase.auth.getSession();
+      if (error) throw error;
+      if (!data.session) {
+        throw new Error('Aucune session de reinitialisation n'a ete creee.');
+      }
+    };
+
     const parseHashParams = () => {
       const hash = window.location.hash.startsWith('#')
         ? window.location.hash.slice(1)
@@ -317,12 +325,22 @@
 
     const initializeRecoverySession = async () => {
       const url = new URL(window.location.href);
+      const tokenHash = url.searchParams.get('token_hash');
+      const type = url.searchParams.get('type');
       const code = url.searchParams.get('code');
 
-      if (code) {
-        const { error } = await supabase.auth.exchangeCodeForSession(code);
+      if (tokenHash && type === 'recovery') {
+        const { error } = await supabase.auth.verifyOtp({
+          token_hash: tokenHash,
+          type: 'recovery',
+        });
         if (error) throw error;
+        await ensureRecoverySession();
         return;
+      }
+
+      if (code) {
+        throw new Error('Lien PKCE non supporte sur la page web statique. Configure le template Supabase avec token_hash.');
       }
 
       const hashParams = parseHashParams();
@@ -335,30 +353,35 @@
           refresh_token: refreshToken,
         });
         if (error) throw error;
+        await ensureRecoverySession();
         return;
       }
 
-      const { data: { session } } = await supabase.auth.getSession();
-      if (!session) {
-        throw new Error('Lien invalide ou expire. Redemande un email de reinitialisation.');
-      }
+      await ensureRecoverySession();
     };
 
     const normalizeSupabaseError = (error) => {
-      const message = (error?.message || '').toLowerCase();
+      const rawMessage = error?.message || '';
+      const message = rawMessage.toLowerCase();
       if (message.includes('same password')) {
-        return 'Choisis un mot de passe different de l\'actuel.';
+        return 'Choisis un mot de passe different de l'actuel.';
       }
       if (message.includes('password should be at least')) {
         return 'Le mot de passe est trop court.';
       }
-      if (message.includes('expired') || message.includes('otp')) {
-        return 'Le lien de reinitialisation a expire. Redemande un nouvel email.';
+      if (message.includes('code verifier')) {
+        return 'Le lien actuel utilise un flow non compatible avec la page web. Mets a jour le template email Supabase avec token_hash.';
       }
-      return error?.message || 'Une erreur est survenue.';
+      if (message.includes('expired') || message.includes('otp') || message.includes('invalid')) {
+        return `Le lien de reinitialisation est invalide ou expire. Détail Supabase: ${rawMessage || 'inconnu'}`;
+      }
+      if (message.includes('aucune session')) {
+        return 'Le lien a bien ete ouvert, mais Supabase n'a pas cree de session de reinitialisation.';
+      }
+      return rawMessage || 'Une erreur est survenue.';
     };
 
-    document.querySelectorAll('[data-toggle-password]').forEach((button) => {
+document.querySelectorAll('[data-toggle-password]').forEach((button) => {
       button.addEventListener('click', () => {
         const input = document.getElementById(button.dataset.togglePassword);
         if (!input) return;
@@ -409,6 +432,7 @@
     try {
       setLoadingState('Verification du lien de reinitialisation...');
       await initializeRecoverySession();
+      window.history.replaceState({}, document.title, '/auth-callback.html');
       setReadyState();
     } catch (error) {
       setBanner(normalizeSupabaseError(error), 'error');
