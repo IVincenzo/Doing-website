@@ -288,7 +288,7 @@
     const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imh6cGJmeGdoZG1ybmR5c210ZmdpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM1MTA3ODksImV4cCI6MjA4OTA4Njc4OX0.IAzIqFP0ZM15GzcF-JjiAHYEFjxaXVj4cYi9ulsXovk';
 
     const supabaseFactory = window.supabase;
-    const supabase = supabaseFactory?.createClient
+    const supabaseClient = supabaseFactory?.createClient
       ? supabaseFactory.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
       : null;
 
@@ -322,7 +322,7 @@
     };
 
     const ensureRecoverySession = async () => {
-      const { data, error } = await supabase.auth.getSession();
+      const { data, error } = await supabaseClient.auth.getSession();
       if (error) throw error;
       if (!data.session) {
         throw new Error("Aucune session de reinitialisation n'a ete creee.");
@@ -343,7 +343,7 @@
       const code = url.searchParams.get('code');
 
       if (tokenHash && type === 'recovery') {
-        const { error } = await supabase.auth.verifyOtp({
+        const { error } = await supabaseClient.auth.verifyOtp({
           token_hash: tokenHash,
           type: 'recovery',
         });
@@ -361,7 +361,7 @@
       const refreshToken = hashParams.get('refresh_token');
 
       if (accessToken && refreshToken) {
-        const { error } = await supabase.auth.setSession({
+        const { error } = await supabaseClient.auth.setSession({
           access_token: accessToken,
           refresh_token: refreshToken,
         });
@@ -438,7 +438,7 @@
       submitBtn.textContent = 'Enregistrement...';
 
       try {
-        const { error } = await supabase.auth.updateUser({ password });
+        const { error } = await supabaseClient.auth.updateUser({ password });
         if (error) throw error;
         setBanner('Mot de passe mis a jour. Tu peux maintenant te reconnecter.', 'success');
         stateCopy.textContent = 'Ton nouveau mot de passe a bien ete enregistre.';
@@ -455,7 +455,7 @@
     const bootstrap = async () => {
       try {
         setLoadingState('Verification du lien de reinitialisation...');
-        if (!supabase) {
+        if (!supabaseClient) {
           throw new Error("Le client Supabase web n'a pas pu etre charge.");
         }
         await initializeRecoverySession();
